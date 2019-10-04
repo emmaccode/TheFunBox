@@ -1,0 +1,45 @@
+class 
+function Rescalar(array)
+    v = []
+    for i in array
+        min = minimum(array)
+        max = maximum(array)
+        x = i
+        x = (x-min) / (max - min)
+        append!(v,x)
+    end
+    return(v)
+end
+# ---- Arbitrary Rescalar ----
+function ArbitraryRescale(array)
+#    v = []
+#    a = minimum(array)
+#    b = maximum(array)
+#    for i in array
+#        x = (a + (i-a*i))*(b-a)) / (b-a)
+#        append!(v,x)
+#    end
+#    return(v)
+end
+# ---- Mean Normalization ----
+function MeanNormalization(array)
+    avg = Lathe.stats.mean(array)
+    v = []
+    a = minimum(array)
+    b = maximum(array)
+    for i in array
+        m = (i-avg) / (b-a)
+        append!(v,m)
+    end
+end
+# ---- Z Normalization ----
+function z_normalize(array)
+    q = Lathe.stats.standardize(array)
+    avg = Lathe.stats.mean(array)
+    v = []
+    for i in array
+        x = i
+        y = (x-avg) / q
+        append!(v,y)
+    end
+end
